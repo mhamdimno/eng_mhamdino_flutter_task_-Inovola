@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 44 44">
+  <g id="Group_77660" data-name="Group 77660" transform="translate(-158 -212)">
+    <rect id="Rectangle_22899" data-name="Rectangle 22899" width="44" height="44" rx="22" transform="translate(158 212)" fill="#f9c5c7"/>
+    <path id="Path_49311" data-name="Path 49311" d="M171.99,43.968a3,3,0,0,0-2.62,1.538l-7.1,12.242a.979.979,0,0,0-.062.125A3,3,0,0,0,164.838,62a1.032,1.032,0,0,0,.107,0h14.062a3,3,0,0,0,2.76-4.125.987.987,0,0,0-.062-.126l-7.1-12.242a3,3,0,0,0-2.62-1.538ZM165,60h-.059a1,1,0,0,1-.895-1.321L171.1,46.5l.01-.017a1,1,0,0,1,1.75,0l.01.017,7.058,12.178A1,1,0,0,1,179,60Zm8-9a1,1,0,0,0-2,0v2a1,1,0,0,0,2,0Zm0,6a1,1,0,0,0-2,0v.01a1,1,0,0,0,2,0Z" transform="translate(8 180)" fill="#d12e34" fill-rule="evenodd"/>
+    <ellipse id="Ellipse_1709" data-name="Ellipse 1709" cx="1.591" cy="1.591" rx="1.591" ry="1.591" transform="translate(187.857 223.298)" fill="#fff"/>
+    <ellipse id="Ellipse_1710" data-name="Ellipse 1710" cx="2.197" cy="2.197" rx="2.197" ry="2.197" transform="translate(191.04 218.297)" fill="#fff"/>
+    <ellipse id="Ellipse_1711" data-name="Ellipse 1711" cx="0.606" cy="0.606" rx="0.606" ry="0.606" transform="translate(187.251 218.903)" fill="#fff"/>
+  </g>
+</svg>

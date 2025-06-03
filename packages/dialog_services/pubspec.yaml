@@ -1,0 +1,27 @@
+name: dialog_services
+version: 1.0.0
+description: Package for dialog services
+publish_to: none
+
+environment:
+  sdk: ">=2.18.6 <3.0.0"
+
+dependencies:
+  shared:
+    path: ../shared
+  ui:
+    path: ../ui
+
+  # DI
+  injectable: ^2.5.0
+  get_it: ^8.0.3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+  # Code generation
+  build_runner: ^2.4.11
+
+  # DI
+  injectable_generator: ^2.1.4

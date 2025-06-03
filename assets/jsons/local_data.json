@@ -1,0 +1,32 @@
+{
+  "categories": [
+    {
+      "id": 1,
+      "name": "Groceries"
+    },
+    {
+      "id": 2,
+      "name": "Entertainment"
+    },
+    {
+      "id": 3,
+      "name": "Gas"
+    },
+    {
+      "id": 4,
+      "name": "Shopping"
+    },
+    {
+      "id": 5,
+      "name": "News Paper"
+    },
+    {
+      "id": 6,
+      "name": "Transport"
+    },
+    {
+      "id": 7,
+      "name": "Rent"
+    }
+  ]
+}
