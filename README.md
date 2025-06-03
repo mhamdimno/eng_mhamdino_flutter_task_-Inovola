@@ -99,13 +99,13 @@ Future<List<T>> getPaginatedData<T>(int page, int pageSize) async {
 5. UI Screenshots
 
 ### Login Screen:
-![Login Screen](assets/screenshots/login.png)
+![Login Screen](assets/screenshots/login.jpeg)
 
 ### Home Screen (Balance & Recent Expenses):
-![Home Screen](assets/screenshots/home.png)
+![Home Screen](assets/screenshots/home.jpeg)
 
 ### Add Expense Screen:
-![Add Expense Screen](assets/screenshots/add_expense.png)
+![Add Expense Screen](assets/screenshots/add_expense.jpeg)
 
 Includes smooth animations, visual feedback, and clean responsive layouts.
 
