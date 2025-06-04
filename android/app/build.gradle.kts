@@ -4,6 +4,15 @@ plugins {
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id("dev.flutter.flutter-gradle-plugin")
 }
+import java.io.FileInputStream
+import java.util.Properties
+
+// Load properties from key.properties
+val keystoreProperties = Properties()
+val keystorePropertiesFile = rootProject.file("key.properties")
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(FileInputStream(keystorePropertiesFile))
+}
 
 android {
     namespace = "com.example.eng_mhamdino_flutter_task"
@@ -28,17 +37,40 @@ android {
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
+   
+ 
     }
+      signingConfigs {
+        create("release") { // Use 'create("name")' for new signing configs
+                // Check if properties exist before using them to prevent errors
+                // during debug builds or if key.properties is missing
+                if (keystoreProperties.containsKey("storeFile")) {
+                    storeFile = file(keystoreProperties["storeFile"] as String)
+                }
+                if (keystoreProperties.containsKey("storePassword")) {
+                    storePassword = keystoreProperties["storePassword"] as String
+                }
+                if (keystoreProperties.containsKey("keyAlias")) {
+                    keyAlias = keystoreProperties["keyAlias"] as String
+                }
+                if (keystoreProperties.containsKey("keyPassword")) {
+                    keyPassword = keystoreProperties["keyPassword"] as String
+                }
+            }
+    }
+  
+   buildTypes {
+        getByName("release") {
+            signingConfig = signingConfigs.getByName("release") // Use getByName
 
-    buildTypes {
-        release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig = signingConfigs.getByName("debug")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                file("proguard-rules.pro")
+            )
         }
     }
-}
 
+}
 flutter {
     source = "../.."
 }
