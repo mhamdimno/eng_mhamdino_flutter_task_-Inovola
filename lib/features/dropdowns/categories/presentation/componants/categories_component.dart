@@ -100,7 +100,7 @@ class _CategoriesComponentState extends State<CategoriesComponent> {
               width: 50,
               height: 50,
               boxFit: BoxFit.fill,
-              clipRRectBorderRadius: 20,
+              clipRRectBorderRadius: 30,
               borderColor: isSelected
                   ? context.colorScheme.primary
                   : Colors.transparent),
@@ -129,6 +129,7 @@ class _CategoriesComponentState extends State<CategoriesComponent> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
+          backgroundColor: Colors.white,
           title: const Text('Add New Category'),
           content: Column(
             mainAxisSize: MainAxisSize.min,
@@ -142,7 +143,6 @@ class _CategoriesComponentState extends State<CategoriesComponent> {
                 controller: newCategoryController,
                 decoration: const InputDecoration(
                   hintText: 'Enter category name',
-                  labelText: 'Category Name',
                 ),
               ),
             ],

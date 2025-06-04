@@ -17,6 +17,14 @@ import 'package:eng_mhamdino_flutter_task/core/local_service/objectbox_service.d
     as _i646;
 import 'package:eng_mhamdino_flutter_task/core/router/bottom_sheets/bottom_sheet.dart'
     as _i4;
+import 'package:eng_mhamdino_flutter_task/features/add_expense/data/repository/add_expense_repository_impl.dart'
+    as _i700;
+import 'package:eng_mhamdino_flutter_task/features/add_expense/domain/repository/add_expense_repository.dart'
+    as _i21;
+import 'package:eng_mhamdino_flutter_task/features/add_expense/domain/usecase/post_add_expense_data_use_case.dart'
+    as _i1070;
+import 'package:eng_mhamdino_flutter_task/features/add_expense/presentation/view_model/add_expense_cubit.dart'
+    as _i739;
 import 'package:eng_mhamdino_flutter_task/features/app/data/repository/languge_repository_impl.dart'
     as _i453;
 import 'package:eng_mhamdino_flutter_task/features/app/data/repository/last_version_repository.dart'
@@ -33,14 +41,6 @@ import 'package:eng_mhamdino_flutter_task/features/app/domain/usecase/save_langu
     as _i861;
 import 'package:eng_mhamdino_flutter_task/features/app/presentation/bloc/app_bloc.dart'
     as _i803;
-import 'package:eng_mhamdino_flutter_task/features/crudExpense/add_expense/data/repository/add_expense_repository_impl.dart'
-    as _i931;
-import 'package:eng_mhamdino_flutter_task/features/crudExpense/add_expense/domain/repository/add_expense_repository.dart'
-    as _i969;
-import 'package:eng_mhamdino_flutter_task/features/crudExpense/add_expense/domain/usecase/post_add_expense_data_use_case.dart'
-    as _i57;
-import 'package:eng_mhamdino_flutter_task/features/crudExpense/add_expense/presentation/view_model/add_expense_cubit.dart'
-    as _i480;
 import 'package:eng_mhamdino_flutter_task/features/dropdowns/categories/data/repository/categories_repository_impl.dart'
     as _i616;
 import 'package:eng_mhamdino_flutter_task/features/dropdowns/categories/domain/repository/categories_repository.dart'
@@ -143,8 +143,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i297.CurrencyInRepositoryImpl(gh<_i54.ApiService>()));
     gh.factory<_i1054.GetCurrencyDataUseCase>(
         () => _i1054.GetCurrencyDataUseCase(gh<_i925.CurrencyRepository>()));
-    gh.factoryAsync<_i969.AddExpenseRepository>(() async =>
-        _i931.AddExpenseInRepositoryImpl(await getAsync<_i432.LocalService>()));
+    gh.factoryAsync<_i21.AddExpenseRepository>(() async =>
+        _i700.AddExpenseInRepositoryImpl(await getAsync<_i432.LocalService>()));
     gh.factoryAsync<_i461.CategoriesRepository>(() async =>
         _i616.CategoriesInRepositoryImpl(await getAsync<_i432.LocalService>()));
     gh.factory<_i34.CurrencyCubit>(
@@ -155,11 +155,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factoryAsync<_i46.PostCategoryDataUseCase>(() async =>
         _i46.PostCategoryDataUseCase(
             await getAsync<_i461.CategoriesRepository>()));
+    gh.factoryAsync<_i1070.PostAddExpenseDataUseCase>(() async =>
+        _i1070.PostAddExpenseDataUseCase(
+            await getAsync<_i21.AddExpenseRepository>()));
     gh.factoryAsync<_i824.GetHomeDataUseCase>(() async =>
         _i824.GetHomeDataUseCase(await getAsync<_i376.HomeRepository>()));
-    gh.factoryAsync<_i57.PostAddExpenseDataUseCase>(() async =>
-        _i57.PostAddExpenseDataUseCase(
-            await getAsync<_i969.AddExpenseRepository>()));
     gh.factoryAsync<_i803.AppBloc>(() async => _i803.AppBloc(
           gh<_i685.GetIsAlreadyLoggedInUseCase>(),
           gh<_i811.NavigationService>(),
@@ -171,14 +171,14 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i85.LogOutUseCase>(),
           gh<_i93.GetUserUseCase>(),
         ));
+    gh.factoryAsync<_i739.AddExpenseCubit>(() async => _i739.AddExpenseCubit(
+        await getAsync<_i1070.PostAddExpenseDataUseCase>()));
     gh.factoryAsync<_i249.CategoriesCubit>(() async => _i249.CategoriesCubit(
           await getAsync<_i710.GetCategoriesDataUseCase>(),
           await getAsync<_i46.PostCategoryDataUseCase>(),
         ));
     gh.factoryAsync<_i509.HomeCubit>(() async =>
         _i509.HomeCubit(await getAsync<_i824.GetHomeDataUseCase>()));
-    gh.factoryAsync<_i480.AddExpenseCubit>(() async => _i480.AddExpenseCubit(
-        await getAsync<_i57.PostAddExpenseDataUseCase>()));
     return this;
   }
 }

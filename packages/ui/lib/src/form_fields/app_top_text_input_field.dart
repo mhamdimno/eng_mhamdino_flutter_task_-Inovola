@@ -24,12 +24,10 @@ class AppTopTextInputField extends StatelessWidget {
                   fontWeight: FontWeight.w700,
                   fontSize: 16,
                 ),
-          ).setAnimation(AnimateType.slideInUp),
+          ).setAnimation(AnimateType.bounceInLeft,
+              delay: Duration(milliseconds: 0)),
         8.heightBox,
-        if (child != null)
-          child!.setAnimation(
-            AnimateType.slideInDown,
-          ),
+        if (child != null) child!,
         8.heightBox,
       ],
     );

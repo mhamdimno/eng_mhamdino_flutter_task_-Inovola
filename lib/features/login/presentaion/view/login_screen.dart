@@ -24,46 +24,42 @@ class LoginScreen extends StatelessWidget {
         child: BlocBuilder<LoginBloc, LoginState>(
           bloc: _loginBloc,
           builder: (context, state) {
-            return state.isLoading
-                ? const AppLoading()
-                // Show error message if exists
-                : state.errorMessage != null
-                    ? Center(
-                        child: AppText(state.errorMessage!)
-                            .setAnimation(AnimateType.bounceInDown),
-                      )
-                    : SingleChildScrollView(
-                        child: AppPadding(
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              100.heightBox,
-                              Text(
-                                // Using textTheme
-                                'Expenset.',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .displaySmall
-                                    ?.copyWith(
-                                      fontWeight: FontWeight.bold,
-                                      color: const Color(0xFF4A68FF),
-                                    ),
-                              ).setAnimation(
-                                AnimateType.bounceInLeft,
-                              ),
-                              const SizedBox(height: 80),
-                              AppText(
-                                // Using textTheme
-                                'Login',
-                                style:
-                                    Theme.of(context).textTheme.headlineLarge,
-                              ),
-                              24.heightBox,
-                              _buildLoginContent(context, state),
-                            ],
+            return state.errorMessage != null
+                ? Center(
+                    child: AppText(state.errorMessage!)
+                        .setAnimation(AnimateType.bounceInDown),
+                  )
+                : SingleChildScrollView(
+                    child: AppPadding(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          100.heightBox,
+                          Text(
+                            // Using textTheme
+                            'Expenset.',
+                            style: Theme.of(context)
+                                .textTheme
+                                .displaySmall
+                                ?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                  color: const Color(0xFF4A68FF),
+                                ),
+                          ).setAnimation(
+                            AnimateType.bounceInLeft,
                           ),
-                        ),
-                      );
+                          const SizedBox(height: 80),
+                          AppText(
+                            // Using textTheme
+                            'Login',
+                            style: Theme.of(context).textTheme.headlineLarge,
+                          ),
+                          24.heightBox,
+                          _buildLoginContent(context, state),
+                        ],
+                      ),
+                    ),
+                  );
           },
         ),
       ),

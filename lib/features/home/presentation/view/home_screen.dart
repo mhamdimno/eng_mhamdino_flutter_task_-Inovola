@@ -115,7 +115,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ],
                       ),
                       Positioned(
-                          top: 150,
+                          top: 180,
                           left: 20,
                           right: 20,
                           child: _buildBalanceCard(context, state.homeModel)),
@@ -163,7 +163,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   )),
                       AppText(
                         // Using textTheme
-                        widget.userModel?.email ?? 'User',
+                        widget.userModel?.email ?? 'Guest',
                         style: Theme.of(context)
                             .textTheme
                             .titleMedium
@@ -191,7 +191,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildBalanceCard(BuildContext context, HomeModel? homeModel) {
     return Container(
-      padding: const EdgeInsets.all(20),
+      height: context.sh * 0.25,
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: const Color(0xFF4A68FF),
         borderRadius: BorderRadius.circular(20),
@@ -204,149 +205,287 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              AppText(
-                // Using textTheme
-                'Total Balance',
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyLarge
-                    ?.copyWith(color: Colors.white70),
-              ),
-              8.widthBox,
-              const Icon(
-                Icons.keyboard_arrow_up_outlined,
-                color: Colors.white70,
-                size: 20,
-              ),
-            ],
-          ),
-          const SizedBox(height: 5),
-          AppText(
-            // Using textTheme
-            '\$ ${homeModel?.totalBalance.toStringAsFixed(2)}',
-            style: Theme.of(context).textTheme.displaySmall?.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Row(
+                  children: [
+                    AppText(
+                      // Using textTheme
+                      'Total Expenses Converted',
+                      maxLines: 1,
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyLarge
+                          ?.copyWith(color: Colors.white70),
+                    ),
+                    8.widthBox,
+                    Container(
+                      padding: const EdgeInsets.all(5),
+                      decoration: BoxDecoration(
+                        color: const Color.fromARGB(255, 112, 137, 245),
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                      child: const Icon(
+                        Icons.arrow_downward,
+                        color: Colors.white70,
+                        size: 20,
+                      ),
+                    ),
+                  ],
                 ),
-          ),
-          const SizedBox(height: 40),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Row(
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.all(5),
-                        decoration: BoxDecoration(
-                          color: const Color.fromARGB(255, 112, 137, 245),
-                          borderRadius: BorderRadius.circular(50),
-                        ),
-                        child: const Icon(
-                          Icons.arrow_downward,
-                          color: Colors.white70,
-                          size: 20,
-                        ),
+                const SizedBox(height: 5),
+                AppText(
+                  // Using textTheme
+                  "\$ -${homeModel?.totalExpensesConverted.toStringAsFixed(2) ?? '0.00 \$'}",
+                  maxLines: 2,
+                  style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 25),
+                ),
+                // const SizedBox(height: 20),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //   children: [
+                //     Column(
+                //       crossAxisAlignment: CrossAxisAlignment.center,
+                //       mainAxisAlignment: MainAxisAlignment.center,
+                //       children: [
+                //         Row(
+                //           children: [
+                //             Container(
+                //               padding: const EdgeInsets.all(5),
+                //               decoration: BoxDecoration(
+                //                 color: const Color.fromARGB(255, 112, 137, 245),
+                //                 borderRadius: BorderRadius.circular(50),
+                //               ),
+                //               child: const Icon(
+                //                 Icons.arrow_downward,
+                //                 color: Colors.white70,
+                //                 size: 20,
+                //               ),
+                //             ),
+                //             const SizedBox(width: 5),
+                //             AppText(
+                //               // Using textTheme
+                //               ' Income',
+                //               style: Theme.of(context)
+                //                   .textTheme
+                //                   .labelLarge
+                //                   ?.copyWith(color: Colors.white70),
+                //             ),
+                //           ],
+                //         ),
+                //         AppText(
+                //           // Using textTheme
+                //           homeModel?.totalIncomeFormateted,
+                //           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                //               color: Colors.white, fontWeight: FontWeight.bold),
+                //         ),
+                //       ],
+                //     ),
+                //     Column(
+                //       crossAxisAlignment: CrossAxisAlignment.center,
+                //       children: [
+                //         Row(
+                //           children: [
+                //             Container(
+                //               padding: const EdgeInsets.all(5),
+                //               decoration: BoxDecoration(
+                //                 color: const Color.fromARGB(255, 112, 137, 245),
+                //                 borderRadius: BorderRadius.circular(50),
+                //               ),
+                //               child: const Icon(
+                //                 Icons.arrow_upward,
+                //                 color: Colors.white70,
+                //                 size: 20,
+                //               ),
+                //             ),
+                //             const SizedBox(width: 5),
+                //             AppText(
+                //               // Using textTheme
+                //               ' Expenses',
+                //               style:
+                //                   Theme.of(context).textTheme.labelMedium?.copyWith(
+                //                         color: Colors.white70,
+                //                       ),
+                //             ),
+                //           ],
+                //         ),
+                //         AppText(
+                //           // Using textTheme
+                //           homeModel?.totalExpensesFormateted,
+                //           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                //               color: Colors.white, fontWeight: FontWeight.bold),
+                //         ),
+                //       ],
+                //     ),
+                //   ],
+                // ),
+              ],
+            ),
+            20.heightBox,
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Row(
+                  children: [
+                    AppText(
+                      // Using textTheme
+                      'Total Expenses Original',
+                      maxLines: 1,
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyLarge
+                          ?.copyWith(color: Colors.white70),
+                    ),
+                    8.widthBox,
+                    Container(
+                      padding: const EdgeInsets.all(5),
+                      decoration: BoxDecoration(
+                        color: const Color.fromARGB(255, 112, 137, 245),
+                        borderRadius: BorderRadius.circular(50),
                       ),
-                      const SizedBox(width: 5),
-                      AppText(
-                        // Using textTheme
-                        ' Income',
-                        style: Theme.of(context)
-                            .textTheme
-                            .labelLarge
-                            ?.copyWith(color: Colors.white70),
+                      child: const Icon(
+                        Icons.arrow_downward,
+                        color: Colors.white70,
+                        size: 20,
                       ),
-                    ],
-                  ),
-                  AppText(
-                    // Using textTheme
-                    '\$ ${homeModel?.totalIncome.toStringAsFixed(2)}',
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                        color: Colors.white, fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Row(
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.all(5),
-                        decoration: BoxDecoration(
-                          color: const Color.fromARGB(255, 112, 137, 245),
-                          borderRadius: BorderRadius.circular(50),
-                        ),
-                        child: const Icon(
-                          Icons.arrow_upward,
-                          color: Colors.white70,
-                          size: 20,
-                        ),
-                      ),
-                      const SizedBox(width: 5),
-                      AppText(
-                        // Using textTheme
-                        ' Expenses',
-                        style:
-                            Theme.of(context).textTheme.labelMedium?.copyWith(
-                                  color: Colors.white70,
-                                ),
-                      ),
-                    ],
-                  ),
-                  AppText(
-                    // Using textTheme
-                    '\$ ${homeModel?.totalExpenses.toStringAsFixed(2)}',
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                        color: Colors.white, fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ],
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 5),
+                AppText(
+                  // Using textTheme
+                  'EGP -${homeModel?.totalExpensesOriginal.toStringAsFixed(2) ?? '0.00 EGP'}',
+                  maxLines: 2,
+                  style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 25),
+                ),
+                // const SizedBox(height: 20),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //   children: [
+                //     Column(
+                //       crossAxisAlignment: CrossAxisAlignment.center,
+                //       mainAxisAlignment: MainAxisAlignment.center,
+                //       children: [
+                //         Row(
+                //           children: [
+                //             Container(
+                //               padding: const EdgeInsets.all(5),
+                //               decoration: BoxDecoration(
+                //                 color: const Color.fromARGB(255, 112, 137, 245),
+                //                 borderRadius: BorderRadius.circular(50),
+                //               ),
+                //               child: const Icon(
+                //                 Icons.arrow_downward,
+                //                 color: Colors.white70,
+                //                 size: 20,
+                //               ),
+                //             ),
+                //             const SizedBox(width: 5),
+                //             AppText(
+                //               // Using textTheme
+                //               ' Income',
+                //               style: Theme.of(context)
+                //                   .textTheme
+                //                   .labelLarge
+                //                   ?.copyWith(color: Colors.white70),
+                //             ),
+                //           ],
+                //         ),
+                //         AppText(
+                //           // Using textTheme
+                //           homeModel?.totalIncomeFormateted,
+                //           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                //               color: Colors.white, fontWeight: FontWeight.bold),
+                //         ),
+                //       ],
+                //     ),
+                //     Column(
+                //       crossAxisAlignment: CrossAxisAlignment.center,
+                //       children: [
+                //         Row(
+                //           children: [
+                //             Container(
+                //               padding: const EdgeInsets.all(5),
+                //               decoration: BoxDecoration(
+                //                 color: const Color.fromARGB(255, 112, 137, 245),
+                //                 borderRadius: BorderRadius.circular(50),
+                //               ),
+                //               child: const Icon(
+                //                 Icons.arrow_upward,
+                //                 color: Colors.white70,
+                //                 size: 20,
+                //               ),
+                //             ),
+                //             const SizedBox(width: 5),
+                //             AppText(
+                //               // Using textTheme
+                //               ' Expenses',
+                //               style:
+                //                   Theme.of(context).textTheme.labelMedium?.copyWith(
+                //                         color: Colors.white70,
+                //                       ),
+                //             ),
+                //           ],
+                //         ),
+                //         AppText(
+                //           // Using textTheme
+                //           homeModel?.totalExpensesFormateted,
+                //           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                //               color: Colors.white, fontWeight: FontWeight.bold),
+                //         ),
+                //       ],
+                //     ),
+                //   ],
+                // ),
+              ],
+            ),
+          ],
+        ),
       ),
     ).setAnimation(AnimateType.moveY);
   }
 
   Widget _buildRecentExpensesList(HomeState state) {
-    return (state.homeModel?.expensedList.length ?? 0) < 1
-        ? const SizedBox()
-        : Expanded(
-            child: state.isLoading
-                ? const Center(child: CircularProgressIndicator())
-                : state.homeModel?.expensedList.isEmpty ?? true
-                    ? Center(
-                        child: AppText(
-                          'No recent expenses',
-                          style: Theme.of(context).textTheme.bodyLarge,
-                        ),
-                      )
-                    : AppList(
-                        onLoadMore: () {
-                          _homeCubit.getHomeData();
-                        },
-                        itemCount: state.homeModel!.expensedList.length +
-                            (state.hasReachedMax ? 0 : 1),
-                        itemBuilder: (context, index) {
-                          if (index >= state.homeModel!.expensedList.length) {
-                            return const SizedBox
-                                .shrink(); // No more data, hide indicator
-                          }
-                          final expense = state.homeModel?.expensedList[index];
-                          return ExpensedItem(
-                            expense: expense,
-                          );
-                        }),
-          );
+    return Expanded(
+      child: state.isLoading
+          ? const Center(child: CircularProgressIndicator())
+          : state.homeModel?.expensedList.isEmpty ?? true
+              ? Center(
+                  child: AppText(
+                    'No recent expenses',
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
+                )
+              : AppList(
+                  onLoadMore: () {
+                    _homeCubit.getHomeData();
+                  },
+                  itemCount: state.homeModel!.expensedList.length +
+                      (state.hasReachedMax ? 0 : 1),
+                  itemBuilder: (context, index) {
+                    if (index >= state.homeModel!.expensedList.length) {
+                      return const SizedBox
+                          .shrink(); // No more data, hide indicator
+                    }
+                    final expense = state.homeModel?.expensedList[index];
+                    return ExpensedItem(
+                      expense: expense,
+                    );
+                  }),
+    );
   }
 }

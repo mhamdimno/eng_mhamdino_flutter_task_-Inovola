@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:eng_mhamdino_flutter_task/features/dropdowns/file_picker/data/model/file_picker_model.dart';
 import 'package:shared/shared.dart';
+import 'package:file_picker/file_picker.dart';
 
 import 'package:ui/ui.dart';
 
@@ -24,10 +24,11 @@ class _FilePickerComponantState extends State<FilePickerComponant> {
   final TextEditingController _controller = TextEditingController();
   // final FilePickerCubit _filePickerCubit = getIt<FilePickerCubit>();
   Future<FilePickerModel> getFilePickerData() async {
-    final pickedFile =
-        await ImagePicker().pickImage(source: ImageSource.gallery);
+    FilePickerResult? result = await FilePicker.platform.pickFiles();
+
     return FilePickerModel(
-        path: pickedFile?.path, name: pickedFile?.path.split('/').last);
+        path: result?.files.single.path!,
+        name: result?.files.single.path?.split('/').last);
   }
 
   @override

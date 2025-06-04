@@ -3,6 +3,7 @@ import 'package:eng_mhamdino_flutter_task/features/dropdowns/categories/domain/u
 import 'package:eng_mhamdino_flutter_task/features/dropdowns/categories/domain/usecase/post_category_data_use_case.dart';
 import 'package:eng_mhamdino_flutter_task/features/dropdowns/currency/data/model/currency_model.dart';
 import 'package:eng_mhamdino_flutter_task/features/home/data/model/expense_model.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,7 +14,8 @@ import 'package:multi_dropdown/multi_dropdown.dart';
 import 'package:shared/shared.dart';
 import 'package:ui/ui.dart';
 
-import '../../../../dropdowns/categories/data/model/cateogory_model.dart';
+import '../../../../core/di/di.dart';
+import '../../../dropdowns/categories/data/model/cateogory_model.dart';
 import '../../domain/usecase/post_add_expense_data_use_case.dart';
 
 part 'add_expense_cubit.freezed.dart';
@@ -35,11 +37,9 @@ class AddExpenseCubit extends Cubit<AddExpenseState> {
   ) : super(AddExpenseState());
   final PostAddExpenseDataUseCase _postAddExpenseDataUseCase;
   TextEditingController amountController = TextEditingController();
-  MultiSelectController<CateogoryModel> catogeryController =
-      MultiSelectController();
 
   ExpenseModel expenseDto = ExpenseModel();
-
+  // final NavigationService _navigationService = getIt<NavigationService>();
   FutureOr<void> onFormValidationChanged(bool isValid) async {
     emit(state.copyWith(isFormValid: isValid));
   }
@@ -53,17 +53,29 @@ class AddExpenseCubit extends Cubit<AddExpenseState> {
 
   double get convertCurrencyAmount {
     if (expenseDto.currency.target == null) return 0.0;
+    if (amountController.text.contains("-")) return 0.0;
     final amount = double.tryParse(amountController.text) ?? 0;
     return amount * (expenseDto.currency.target?.value ?? 1.0);
   }
 
   Future<void> addExpenseData(BuildContext context) async {
-    expenseDto.amount = convertCurrencyAmount;
+    if (expenseDto.category.target == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: AppText('Please select a category',
+              style: TextStyle(color: Colors.white)),
+          backgroundColor: Colors.red,
+        ),
+      );
+      return;
+    }
+    expenseDto.originalAmount = double.tryParse(amountController.text) ?? 0;
+    expenseDto.convertedAmount = convertCurrencyAmount;
 
     emit(state.copyWith(isLoading: true));
     final result = await _postAddExpenseDataUseCase.execute(expenseDto);
     result.when(success: (model) {
-      Navigator.pop(context, true);
+      Navigator.of(context).pop(true);
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: AppText('Expense added successfully!',

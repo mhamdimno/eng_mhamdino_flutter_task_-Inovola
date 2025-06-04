@@ -39,7 +39,7 @@ class ExpensedItem extends StatelessWidget {
             style: Theme.of(context).textTheme.bodySmall,
           ),
           trailing: AppText(
-            '- \$ ${expense?.amount?.toStringAsFixed(2)}',
+            '-  ${expense?.formatedAmount}',
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                   // color: Colors.green,
                   fontWeight: FontWeight.bold,

@@ -9,9 +9,9 @@ import 'package:multi_dropdown/multi_dropdown.dart';
 import 'package:shared/shared.dart';
 
 import 'package:ui/ui.dart';
-import '../../../../../core/di/di.dart';
-import '../../../../dropdowns/categories/data/model/cateogory_model.dart';
-import '../../../../dropdowns/categories/presentation/componants/categories_component.dart';
+import '../../../../core/di/di.dart';
+import '../../../dropdowns/categories/data/model/cateogory_model.dart';
+import '../../../dropdowns/categories/presentation/componants/categories_component.dart';
 import '../view_model/add_expense_cubit.dart';
 
 class AddExpenseScreen extends StatefulWidget {
@@ -128,6 +128,7 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                                   AnimateType.bounceInDown,
                                   delay: AppAnimations.delay_s1_2,
                                 ),
+                                30.heightBox,
                               ],
                             ),
                           ),

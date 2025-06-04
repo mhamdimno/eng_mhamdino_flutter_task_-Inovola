@@ -58,7 +58,7 @@ class _AppImageState extends State<AppImage> {
             decoration: BoxDecoration(
               borderRadius:
                   BorderRadius.circular(widget.clipRRectBorderRadius ?? 0),
-              border: Border.all(color: widget.borderColor!, width: 1),
+              border: Border.all(color: widget.borderColor!, width: 2),
             ),
             child: _buildClipRRectImage(path),
           );

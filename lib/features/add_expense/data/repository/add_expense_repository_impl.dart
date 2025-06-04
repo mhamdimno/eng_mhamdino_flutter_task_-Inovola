@@ -3,7 +3,7 @@ import 'package:eng_mhamdino_flutter_task/core/local_service/local_service.dart'
 import 'package:eng_mhamdino_flutter_task/core/local_service/objectbox_service.dart';
 import 'package:eng_mhamdino_flutter_task/features/home/data/model/expense_model.dart';
 import 'package:injectable/injectable.dart';
-import '../../../../../core/constants/api_path.dart';
+import '../../../../core/constants/api_path.dart';
 
 import '../../domain/repository/add_expense_repository.dart';
 // static const String addExpense = '$_api/addExpense';

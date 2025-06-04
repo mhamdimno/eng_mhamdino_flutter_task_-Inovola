@@ -34,7 +34,9 @@ abstract class AppThemes {
         ),
       ),
     ),
-    hoverColor: const Color(0xFFEEFFF5),
+    hoverColor: Colors.transparent,
+    highlightColor: Colors.transparent,
+    splashColor: Colors.transparent,
     disabledColor: const Color(0xFFBFBDD1),
 
     inputDecorationTheme: InputDecorationTheme(

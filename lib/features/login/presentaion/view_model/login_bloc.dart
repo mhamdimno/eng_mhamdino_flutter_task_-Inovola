@@ -49,7 +49,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       _LoginPressedEvent event, Emitter<LoginState> emit) async {
     emit(state.copyWith(isLoading: true));
     LoginDto loginDto = event.loginDto;
-    Future.delayed(
+    await Future.delayed(
         const Duration(seconds: 2)); // Optional delay for UI smoothness
 
     final result = await _loginUseCase.execute(loginDto);

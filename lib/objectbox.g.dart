@@ -53,7 +53,7 @@ final _entities = <obx_int.ModelEntity>[
   obx_int.ModelEntity(
       id: const obx_int.IdUid(5, 3000888102721171665),
       name: 'ExpenseModel',
-      lastPropertyId: const obx_int.IdUid(8, 1972629998024514638),
+      lastPropertyId: const obx_int.IdUid(10, 1100467605581329887),
       flags: 0,
       properties: <obx_int.ModelProperty>[
         obx_int.ModelProperty(
@@ -61,11 +61,6 @@ final _entities = <obx_int.ModelEntity>[
             name: 'id',
             type: 6,
             flags: 1),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(2, 1924476371122966949),
-            name: 'amount',
-            type: 8,
-            flags: 0),
         obx_int.ModelProperty(
             id: const obx_int.IdUid(3, 2411461138081273026),
             name: 'date',
@@ -99,6 +94,16 @@ final _entities = <obx_int.ModelEntity>[
             id: const obx_int.IdUid(8, 1972629998024514638),
             name: 'dateSelected',
             type: 10,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(9, 2272218043081352286),
+            name: 'originalAmount',
+            type: 8,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(10, 1100467605581329887),
+            name: 'convertedAmount',
+            type: 8,
             flags: 0)
       ],
       relations: <obx_int.ModelRelation>[],
@@ -188,7 +193,8 @@ obx_int.ModelDefinition getObjectBoxModel() {
         3686812921040012155,
         6839489210673280994,
         624813059317328989,
-        1516900736423468034
+        1516900736423468034,
+        1924476371122966949
       ],
       retiredRelationUids: const [],
       modelVersion: 5,
@@ -251,15 +257,16 @@ obx_int.ModelDefinition getObjectBoxModel() {
               object.date == null ? null : fbb.writeString(object.date!);
           final imageOffset =
               object.image == null ? null : fbb.writeString(object.image!);
-          fbb.startTable(9);
+          fbb.startTable(11);
           fbb.addInt64(0, object.id ?? 0);
-          fbb.addFloat64(1, object.amount);
           fbb.addOffset(2, dateOffset);
           fbb.addOffset(3, imageOffset);
           fbb.addInt64(4, object.category.targetId);
           fbb.addInt64(5, object.currency.targetId);
           fbb.addInt64(6, object.createdAt.millisecondsSinceEpoch);
           fbb.addInt64(7, object.dateSelected?.millisecondsSinceEpoch);
+          fbb.addFloat64(8, object.originalAmount);
+          fbb.addFloat64(9, object.convertedAmount);
           fbb.finish(fbb.endTable());
           return object.id ?? 0;
         },
@@ -270,8 +277,13 @@ obx_int.ModelDefinition getObjectBoxModel() {
               const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 18);
           final idParam =
               const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 4);
-          final amountParam =
-              const fb.Float64Reader().vTableGetNullable(buffer, rootOffset, 6);
+          final originalAmountParam = const fb.Float64Reader()
+              .vTableGetNullable(buffer, rootOffset, 20);
+          final convertedAmountParam = const fb.Float64Reader()
+              .vTableGetNullable(buffer, rootOffset, 22);
+          final dateSelectedParam = dateSelectedValue == null
+              ? null
+              : DateTime.fromMillisecondsSinceEpoch(dateSelectedValue);
           final dateParam = const fb.StringReader(asciiOptimization: true)
               .vTableGetNullable(buffer, rootOffset, 8);
           final imageParam = const fb.StringReader(asciiOptimization: true)
@@ -280,13 +292,12 @@ obx_int.ModelDefinition getObjectBoxModel() {
               const fb.Int64Reader().vTableGet(buffer, rootOffset, 16, 0));
           final object = ExpenseModel(
               id: idParam,
-              amount: amountParam,
+              originalAmount: originalAmountParam,
+              convertedAmount: convertedAmountParam,
+              dateSelected: dateSelectedParam,
               date: dateParam,
               image: imageParam,
-              createdAt: createdAtParam)
-            ..dateSelected = dateSelectedValue == null
-                ? null
-                : DateTime.fromMillisecondsSinceEpoch(dateSelectedValue);
+              createdAt: createdAtParam);
           object.category.targetId =
               const fb.Int64Reader().vTableGet(buffer, rootOffset, 12, 0);
           object.category.attach(store);
@@ -355,33 +366,37 @@ class ExpenseModel_ {
   static final id =
       obx.QueryIntegerProperty<ExpenseModel>(_entities[1].properties[0]);
 
-  /// See [ExpenseModel.amount].
-  static final amount =
-      obx.QueryDoubleProperty<ExpenseModel>(_entities[1].properties[1]);
-
   /// See [ExpenseModel.date].
   static final date =
-      obx.QueryStringProperty<ExpenseModel>(_entities[1].properties[2]);
+      obx.QueryStringProperty<ExpenseModel>(_entities[1].properties[1]);
 
   /// See [ExpenseModel.image].
   static final image =
-      obx.QueryStringProperty<ExpenseModel>(_entities[1].properties[3]);
+      obx.QueryStringProperty<ExpenseModel>(_entities[1].properties[2]);
 
   /// See [ExpenseModel.category].
   static final category = obx.QueryRelationToOne<ExpenseModel, CateogoryModel>(
-      _entities[1].properties[4]);
+      _entities[1].properties[3]);
 
   /// See [ExpenseModel.currency].
   static final currency = obx.QueryRelationToOne<ExpenseModel, CurrencyModel>(
-      _entities[1].properties[5]);
+      _entities[1].properties[4]);
 
   /// See [ExpenseModel.createdAt].
   static final createdAt =
-      obx.QueryDateProperty<ExpenseModel>(_entities[1].properties[6]);
+      obx.QueryDateProperty<ExpenseModel>(_entities[1].properties[5]);
 
   /// See [ExpenseModel.dateSelected].
   static final dateSelected =
-      obx.QueryDateProperty<ExpenseModel>(_entities[1].properties[7]);
+      obx.QueryDateProperty<ExpenseModel>(_entities[1].properties[6]);
+
+  /// See [ExpenseModel.originalAmount].
+  static final originalAmount =
+      obx.QueryDoubleProperty<ExpenseModel>(_entities[1].properties[7]);
+
+  /// See [ExpenseModel.convertedAmount].
+  static final convertedAmount =
+      obx.QueryDoubleProperty<ExpenseModel>(_entities[1].properties[8]);
 }
 
 /// [CurrencyModel] entity fields to define ObjectBox queries.

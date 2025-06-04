@@ -49,7 +49,7 @@ enum AnimateType {
 
 class AppAnimations {
   static bool get disable => false.if_release(false);
-  static double get speed => 1;
+  static double get speed => 1.1;
   static Duration get duration_toast => Duration(seconds: 3);
   static Duration get duration_ms200 =>
       disable ? 0.seconds : (200 * speed).milliseconds;
@@ -107,7 +107,7 @@ extension AnimationExtentions on Widget {
       Duration? delay,
       double moveY = 1000,
       double moveX = 500,
-      bool withDelay = true,
+      bool withDelay = false,
       Duration? duration,
       bool repeated = false,
       bool,

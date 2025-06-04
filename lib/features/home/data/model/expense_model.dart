@@ -10,7 +10,8 @@ import '../../../dropdowns/categories/data/model/cateogory_model.dart';
 class ExpenseModel {
   @Id()
   int? id;
-  double? amount;
+  double? originalAmount;
+  double? convertedAmount;
   String? date;
   DateTime? dateSelected;
   String? image;
@@ -22,10 +23,14 @@ class ExpenseModel {
   // Corrected constructor
   ExpenseModel({
     this.id,
-    this.amount,
+    this.originalAmount,
+    this.convertedAmount,
+    this.dateSelected,
     this.date,
     this.image, // Don't forget to include image if it's a property
     DateTime? createdAt, // Make it nullable if you want to explicitly pass it
-  }) : this.createdAt =
-            createdAt ?? DateTime.now(); // This line sets the default
+  }) : createdAt = createdAt ?? DateTime.now();
+
+  String get formatedAmount =>
+      '${convertedAmount?.toStringAsFixed(2)} \$\n - ${originalAmount?.toStringAsFixed(2)} EGP'; // This line sets the default
 }

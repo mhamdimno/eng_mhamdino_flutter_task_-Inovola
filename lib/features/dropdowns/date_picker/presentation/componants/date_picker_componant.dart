@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:eng_mhamdino_flutter_task/features/dropdowns/file_picker/data/model/file_picker_model.dart';
 import 'package:shared/shared.dart';
 
 import 'package:ui/ui.dart';
